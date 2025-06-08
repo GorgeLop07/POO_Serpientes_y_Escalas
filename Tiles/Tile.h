@@ -13,6 +13,9 @@ class Tile {
         virtual char getType() const;
         void setType(char);
 
+        virtual int operator+(int value) const {
+            return value;
+        }
 
 };
 

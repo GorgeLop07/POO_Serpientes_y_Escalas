@@ -11,8 +11,11 @@
 
 using namespace std;
 
+int penalty = 0;
+int reward = 0;
+
 int main() {
-    int tiles, snakes, ladders, players, turns, penalty, reward;
+    int tiles, snakes, ladders, players, turns;
     char gameType;
     //Seed 0 es para los valores por defecto, si se quiere cambiar los parametros del juego ingresa 1
     int seed = 0;

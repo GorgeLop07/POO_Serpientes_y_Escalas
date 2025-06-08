@@ -9,6 +9,7 @@ class LadderTile : public Tile {
     public:
         LadderTile();
         ~LadderTile() override;
+        int operator+(int value) const override;
         //char getType() const override; // Override para el tipo de tile
 };
 

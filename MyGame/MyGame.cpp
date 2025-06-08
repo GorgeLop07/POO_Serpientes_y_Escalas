@@ -72,24 +72,20 @@ void MyGame::start() {
                         cout << "Error: acceso fuera de rango en tiles. Índice: " << tileIndex << endl;
                         continue;
                     }
-                    char c = board.getTile(tileIndex)->getType();
+                    Tile* tile = board.getTile(tileIndex);
                 
+                    int resultado = (*tile) + players[i].getTile();
+                    players[i].setTile(resultado, maxTiles);
+                
+                    char c = tile->getType();
                     int penalidad = 0, recompensa = 0;
-                    if (c == 'S') {
-                        players[i].setTile(players[i].getTile() - penalty, maxTiles);
-                        penalidad = penalty;
-                    } else if (c == 'L') {
-                        players[i].setTile(players[i].getTile() + reward, maxTiles);
-                        recompensa = reward;
-                    }
+                    if (c == 'S') penalidad = penalty;
+                    if (c == 'L') recompensa = reward;
                 
-                    int resultado = players[i].getTile();
-                
-                    // Imprime solo una vez por jugador por turno
-                    Turno turnoActual(turn, players[i].getNumber(), posInicial, number, c, resultado, penalidad, recompensa);
+                    Turno turnoActual(turn, players[i].getNumber(), posInicial, number, c, players[i].getTile(), penalidad, recompensa);
                     cout << turnoActual << endl;
                 
-                    if (resultado >= board.getTilescout()) {
+                    if (players[i].getTile() >= board.getTilescout()) {
                         cout << "Player " << (i + 1) << " is the winner!!!" << endl;
                         cout << "<<< GAME OVER >>>" << endl;
                         return;
@@ -133,24 +129,20 @@ void MyGame::start(bool isAutomatic) {
                     cout << "Error: acceso fuera de rango en tiles. Índice: " << tileIndex << endl;
                     continue;
                 }
-                char c = board.getTile(tileIndex)->getType();
+                Tile* tile = board.getTile(tileIndex);
             
+                int resultado = (*tile) + players[i].getTile();
+                players[i].setTile(resultado, maxTiles);
+            
+                char c = tile->getType();
                 int penalidad = 0, recompensa = 0;
-                if (c == 'S') {
-                    players[i].setTile(players[i].getTile() - penalty, maxTiles);
-                    penalidad = penalty;
-                } else if (c == 'L') {
-                    players[i].setTile(players[i].getTile() + reward, maxTiles);
-                    recompensa = reward;
-                }
+                if (c == 'S') penalidad = penalty;
+                if (c == 'L') recompensa = reward;
             
-                int resultado = players[i].getTile();
-            
-                // Imprime solo una vez por jugador por turno
-                Turno turnoActual(turn, players[i].getNumber(), posInicial, number, c, resultado, penalidad, recompensa);
+                Turno turnoActual(turn, players[i].getNumber(), posInicial, number, c, players[i].getTile(), penalidad, recompensa);
                 cout << turnoActual << endl;
             
-                if (resultado >= board.getTilescout()) {
+                if (players[i].getTile() >= board.getTilescout()) {
                     cout << "Player " << (i + 1) << " is the winner!!!" << endl;
                     cout << "<<< GAME OVER >>>" << endl;
                     return;
