@@ -38,3 +38,6 @@ void Player::setTile(int t, int maxTile) {
 int Player::getTile() {
     return tile;
 }
+int Player::getId(){ 
+    return id; 
+}

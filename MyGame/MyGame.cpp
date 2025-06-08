@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "../Dice/Dice.h"
 #include "../Board/Board.h"
+#include "../Turno/Turno.h"
 #include "MyGame.h"
 
 using namespace std;
@@ -61,30 +62,36 @@ void MyGame::start() {
             if(option == 'C') {
                 cout << "Turn " << to_string(turn) << endl;
                 for (size_t i = 0; i < players.size(); ++i) {
+                    int posInicial = players[i].getTile();
                     int number = dice.roll();
                     cout << players[i].draw() << " dado: " << number << " ";
-
-                    players[i].setTile(players[i].getTile() + number, maxTiles);
-
-
-
+                
+                    players[i].setTile(posInicial + number, maxTiles);
+                
                     char c = board.getTile(players[i].getTile() - 1)->getType();
                     cout << c << " ";
-
-                    
-                    if(c == 'S') {
+                
+                    int penalidad = 0, recompensa = 0;
+                    if (c == 'S') {
                         players[i].setTile(players[i].getTile() - penalty, maxTiles);
+                        penalidad = penalty;
                         cout << "(-" << penalty << ") ";
                     }
-                    else if(c == 'L') {
+                    else if (c == 'L') {
                         players[i].setTile(players[i].getTile() + reward, maxTiles);
+                        recompensa = reward;
                         cout << "(+" << reward << ") ";
                     }
-
-                    cout << "Now at tile " << players[i].getTile() << endl;
-
-                   
-                    if(players[i].getTile() >= board.getTilescout()) {
+                
+                    int resultado = players[i].getTile();
+                    cout << "Now at tile " << resultado << endl;
+                
+                    // --- Aquí aplicas la sobrecarga de << ---
+                    Turno turnoActual(turn, players[i].getId(), posInicial, number, c, resultado, penalidad, recompensa);
+                    cout << turnoActual << endl;
+                    // ----------------------------------------
+                
+                    if (resultado >= board.getTilescout()) {
                         cout << "Player " << (i + 1) << " is the winner!!!" << endl;
                         cout << "<<< GAME OVER >>>" << endl;
                         return;
@@ -117,31 +124,36 @@ void MyGame::start(bool isAutomatic) {
         while (turn <= maxTurns) {
             cout << "Turn " << to_string(turn) << endl;
             for (size_t i = 0; i < players.size(); ++i) {
+                int posInicial = players[i].getTile();
                 int number = dice.roll();
                 cout << players[i].draw() << " dado: " << number << " ";
-
-
-
-                players[i].setTile(players[i].getTile() + number, maxTiles);
-  
+            
+                players[i].setTile(posInicial + number, maxTiles);
+            
                 char c = board.getTile(players[i].getTile() - 1)->getType();
-
                 cout << c << " ";
-
-
+            
+                int penalidad = 0, recompensa = 0;
                 if (c == 'S') {
                     players[i].setTile(players[i].getTile() - penalty, maxTiles);
+                    penalidad = penalty;
                     cout << "(-" << penalty << ") ";
                 }
                 else if (c == 'L') {
                     players[i].setTile(players[i].getTile() + reward, maxTiles);
+                    recompensa = reward;
                     cout << "(+" << reward << ") ";
                 }
-
-                cout << "Now at tile " << players[i].getTile() << endl;
-
-
-                if (players[i].getTile() >= board.getTilescout()) {
+            
+                int resultado = players[i].getTile();
+                cout << "Now at tile " << resultado << endl;
+            
+                // --- Aquí aplicas la sobrecarga de << ---
+                Turno turnoActual(turn, players[i].getId(), posInicial, number, c, resultado, penalidad, recompensa);
+                cout << turnoActual << endl;
+                // ----------------------------------------
+            
+                if (resultado >= board.getTilescout()) {
                     cout << "Player " << (i + 1) << " is the winner!!!" << endl;
                     cout << "<<< GAME OVER >>>" << endl;
                     return;
