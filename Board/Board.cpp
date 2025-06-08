@@ -40,6 +40,8 @@ Board::Board() {
             ladders++;
         }
     }
+
+    std :: cout << "Board Iniciali: " << draw() << std::endl;
 }
 
 Board::Board(int tilesCount, int snakes, int ladders) {
@@ -71,12 +73,16 @@ Board::Board(int tilesCount, int snakes, int ladders) {
             laddersPlaced++;
         }
     }
+        std :: cout << "Board Iniciali: " << draw() << std::endl;
 }
 
 
 string Board::draw(){
     string brd = "";
     for (Tile* t : tiles) {
+        if(t == nullptr){
+            brd += "?";
+        }
         brd += t->getType();
         brd += " ";
     }
@@ -84,6 +90,11 @@ string Board::draw(){
 }
 
 Tile* Board::getTile(int index) {
+    if (index < 0 || index >= numTiles){
+        std :: cerr << "Error: getTile index out of bonds:" << index << std :: endl;
+        return nullptr;
+    }
+
     return tiles[index];
 }
 
@@ -95,3 +106,4 @@ Board::~Board() {
     for (Tile* t : tiles)
         delete t;
 }
+

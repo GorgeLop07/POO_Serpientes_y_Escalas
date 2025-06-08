@@ -17,7 +17,6 @@ class Player {
   private:
     int number;
     int tile;
-    int id;
     
   public:
     Player();
@@ -25,7 +24,7 @@ class Player {
     string draw();
     void setTile(int, int); //El default es 30 tiles
     int getTile();
-    int getId();
+    int getNumber();
 
 };
 

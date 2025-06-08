@@ -9,7 +9,7 @@ class SnakeTile : public Tile {
     public:
         SnakeTile();
         ~SnakeTile() override;
-        char getType() const override; // Override para el tipo de tile
+        //char getType() const override; // Override para el tipo de tile
 };
 
 
