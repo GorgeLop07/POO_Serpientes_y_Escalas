@@ -14,9 +14,8 @@
 
 using namespace std;
 
-MyGame::MyGame() {
+MyGame::MyGame() : board(30, 3, 3){
     // El default lo dejo como 30 tiles, 3 snakes, 3 ladders, 1 player, 30 turns, 3 penalty, 3 reward, gameType 'A'
-    board = Board(30, 3, 3);
     maxTiles = 30;
     maxTurns = 30; 
     penalty = 3;   
@@ -33,8 +32,7 @@ MyGame::MyGame() {
 
 
 MyGame::MyGame(int tiles, int snakes, int ladders, int numPlayers, int turns, int pen, int rew, char type)
-{
-    board = Board(tiles, snakes, ladders);
+: board(tiles, snakes, ladders){
     maxTiles = tiles;
     maxTurns = turns;
     penalty = pen;
