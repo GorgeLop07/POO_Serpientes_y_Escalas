@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar todo",
+      "type": "shell",
+      "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+      "args": [
+        "main.cpp",
+        "MyGame/MyGame.cpp",
+        "Board/Board.cpp",
+        "Player/Player.cpp",
+        "Dice/Dice.cpp",
+        "Tiles/Tile.cpp",
+        "Tiles/SnakeTile/SnakeTile.cpp",
+        "Tiles/LadderTile/LadderTile.cpp",
+        "Turno/Turno.cpp",
+        "-o",
+        "main.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
